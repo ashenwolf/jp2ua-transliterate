@@ -1106,6 +1106,7 @@ var k2ua = {
   	$('#jap-src').keyup(translate);
   	$('#source-map').change(function() {
 		converterMap = eval($('#source-map').val());
+		translate();
 	});
     };
 

@@ -1094,10 +1094,10 @@ var k2ua = {
 			<td><input type="text" id="jap-src" /></td> \
 			<td><input type="text" id="jap-dst" /></td> \
 		</tr> \
+		<tr> \
 			<td style="text-align: right;"><input type="button" id="jap-trans" value="Транслітерувати &raquo;" /></td> \
 			<td>&nbsp;</td> \
 		</tr> \
-		<tr> \
 	</table> \
 </div>');
 

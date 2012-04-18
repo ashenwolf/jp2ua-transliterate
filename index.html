@@ -2,14 +2,18 @@
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="jp2ua.css" />	
 </head>
 <body>
-	<div id="placeholder"></div>
+	<a href="#" id="jp2ua-activate">Show window</a>
+	<div id="jp2ua-holder"></div>
+
 	<script type="text/javascript" src="jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="widget.js"></script>
 	<script type="text/javascript">
-		$("#placeholder").japTrans();
+		$("#jp2ua-activate").jp2ua({
+			"window-holder": "#jp2ua-holder",
+		});
 	</script>
 </body>
 </html>
-

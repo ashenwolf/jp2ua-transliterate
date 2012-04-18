@@ -1468,6 +1468,28 @@ var k2ua = {
 
 	var converterMap = r2ua;
 
+	var window_width = $(window).width();
+	var window_height = $(window).height();
+
+	$(document).ready(onResize);
+	$(window).resize(onResize);
+
+	function onResize() {
+		window_width = $(window).width();
+//		window_height = $(window).height();
+
+	        //get the height and width of the modal
+        	var modal_width = $(".jp2ua.window").outerWidth();
+//	        var modal_height = $(".jp2ua-window").outerHeight();
+
+	        //calculate top and left offset needed for centering
+        	var left = (window_width-modal_width)/2;
+//	        var top = (window_height-modal_height)/2;
+
+        	//apply new top and left css values
+		$(".jp2ua.window").css({'left' : left}); //'top' : top, 
+	}
+
 	function doconvert(src) {
 		function traverse(i, chars, ws) {
 			var c = src[i];
@@ -1500,37 +1522,60 @@ var k2ua = {
 		$("#jap-dst").val(doconvert(src.toLowerCase()));
 	}
 
+	function showPopup() {
+		$('.jp2ua.overlay').css({ 'display' : 'block', opacity : 64});  
+		$('.jp2ua.overlay').fadeTo(500,0.8);
+		$('.jp2ua.window').slideDown(500);
+	}
 
-  $.fn.japTrans = function() {
-  	this.html('\
-<div id="japtrans-content"> \
-	<table> \
-		<tr> \
-			<td><select style="width: 100%;" id="source-map"> \
-				<option value="r2ua">Ромаджі</options> \
-				<option value="h2ua">Хірагана</options> \
-				<option value="k2ua">Катакана</options> \
-			</select></td> \
-			<td>Українська</td> \
-		</tr> \
-		<tr> \
-			<td><input type="text" id="jap-src" /></td> \
-			<td><input type="text" id="jap-dst" /></td> \
-		</tr> \
-		<tr> \
-			<td style="text-align: left;"><input type="button" id="jap-trans" value="Транслітерувати &raquo;" /></td> \
-			<td>&nbsp;</td> \
-		</tr> \
-	</table> \
-</div>');
+	function hidePopup() {
+		$('.jp2ua.overlay').fadeOut(500); 
+		$('.jp2ua.window').slideUp(500); 
+	}
 
-  	$('#jap-trans').click(translate);
-  	$('#jap-src').change(translate);
-  	$('#jap-src').keyup(translate);
-  	$('#source-map').change(function() {
+
+
+  $.fn.jp2ua = function(options) {
+	var settings = $.extend( {
+		'window-holder': '#jp2ua-placeholder',
+	}, options);
+
+	$(settings['window-holder']).html(' \
+		<div class="jp2ua overlay"></div> \
+		<div class="jp2ua window"> \
+			<h3>Японсько-українська транслітерація</h3> \
+			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div><hr /> \
+			<table> \
+				<tr> \
+					<td><select style="width: 100%;" id="source-map"> \
+						<option value="r2ua">Ромаджі</options> \
+						<option value="h2ua">Хірагана</options> \
+						<option value="k2ua">Катакана</options> \
+					</select></td> \
+					<td>Українська</td> \
+				</tr> \
+				<tr> \
+					<td><input type="text" id="jap-src" /></td> \
+					<td><input type="text" id="jap-dst" /></td> \
+				</tr> \
+				<tr> \
+					<td style="text-align: right;"><input type="button" id="jap-trans" value="Транслітерувати &raquo;" /></td> \
+					<td>&nbsp;</td> \
+				</tr> \
+			</table> \
+		</div> \
+	');
+
+	$('.jp2ua.overlay').click(hidePopup);
+	$('#jap-trans').click(translate);
+	$('#jap-src').change(translate);
+	$('#jap-src').keyup(translate);
+	$('#source-map').change(function() {
 		converterMap = eval($('#source-map').val());
 		translate();
 	});
-    };
+
+	this.click(showPopup);
+  };
 
 })( jQuery );

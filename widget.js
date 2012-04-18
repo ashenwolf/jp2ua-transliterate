@@ -1544,7 +1544,7 @@ var k2ua = {
 		<div class="jp2ua overlay"></div> \
 		<div class="jp2ua window"> \
 			<h3>Японсько-українська транслітерація</h3> \
-			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div><hr /> \
+			<hr /> \
 			<table> \
 				<tr> \
 					<td><select style="width: 100%;" id="source-map"> \
@@ -1558,16 +1558,17 @@ var k2ua = {
 					<td><input type="text" id="jap-src" /></td> \
 					<td><input type="text" id="jap-dst" /></td> \
 				</tr> \
-				<tr> \
+<!--				<tr> \
 					<td style="text-align: right;"><input type="button" id="jap-trans" value="Транслітерувати &raquo;" /></td> \
 					<td>&nbsp;</td> \
-				</tr> \
+				</tr>--> \
 			</table> \
+			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div> \
 		</div> \
 	');
 
 	$('.jp2ua.overlay').click(hidePopup);
-	$('#jap-trans').click(translate);
+	//$('#jap-trans').click(translate);
 	$('#jap-src').change(translate);
 	$('#jap-src').keyup(translate);
 	$('#source-map').change(function() {

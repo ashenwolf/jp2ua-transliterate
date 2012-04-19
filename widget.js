@@ -3041,8 +3041,8 @@ var k2uav = {
 					<td>&rarr; Українська</td> \
 				</tr> \
 				<tr> \
-					<td><input type="text" id="jap-src" style="width: 90%;" /></td> \
-					<td><input type="text" id="jap-dst" style="width: 90%;"/></td> \
+					<td><input type="text" id="jap-src" style="width: 100%;" /></td> \
+					<td><input type="text" id="jap-dst" style="width: 100%;"/></td> \
 				</tr> \
 			</table> \
 			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div> \

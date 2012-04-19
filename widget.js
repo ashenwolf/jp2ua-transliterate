@@ -1645,7 +1645,22 @@ var k2ua = {
 		$('.jp2ua.window').slideUp(500); 
 	}
 
+	var variantsVisibilityMap = {
+		"r2ua": false,
+		"h2ua": true,
+		"k2ua": true,
+	}
 
+	function changeDictionary() {
+		if (variantsVisibilityMap[$('#source-map').val()])
+			$('#jp2ua-variants').removeAttr("disabled");
+		else {
+			$('#jp2ua-variants').attr("disabled", true);
+			$('#jp2ua-variants').removeAttr('checked');
+		}
+		converterMap = eval($('#source-map').val() + ($('#jp2ua-variants').attr('checked') ? "v" : ""));
+		translate();
+	}
 
   $.fn.jp2ua = function(options) {
 	var settings = $.extend( {
@@ -1657,36 +1672,30 @@ var k2ua = {
 		<div class="jp2ua window"> \
 			<h3>Японсько-українська транслітерація</h3> \
 			<hr /> \
-			<table> \
+			<table style="width: 100%;"> \
 				<tr> \
-					<td><select style="width: 100%;" id="source-map"> \
+					<td><select style="width: 50%;" id="source-map"> \
 						<option value="r2ua">Ромаджі</options> \
 						<option value="h2ua">Хірагана</options> \
 						<option value="k2ua">Катакана</options> \
-					</select></td> \
-					<td>Українська</td> \
+					</select> \
+					<input type="checkbox" id="jp2ua-variants" name="variants" value="v" ' + (variantsVisibilityMap["r2ua"] ? "" : "disabled") + '><small>Варіанти</small></input></td> \
+					<td>&rarr; Українська</td> \
 				</tr> \
 				<tr> \
-					<td><input type="text" id="jap-src" /></td> \
-					<td><input type="text" id="jap-dst" /></td> \
+					<td><input type="text" id="jap-src" style="width: 90%;" /></td> \
+					<td><input type="text" id="jap-dst" style="width: 90%;"/></td> \
 				</tr> \
-<!--				<tr> \
-					<td style="text-align: right;"><input type="button" id="jap-trans" value="Транслітерувати &raquo;" /></td> \
-					<td>&nbsp;</td> \
-				</tr>--> \
 			</table> \
 			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div> \
 		</div> \
 	');
 
 	$('.jp2ua.overlay').click(hidePopup);
-	//$('#jap-trans').click(translate);
 	$('#jap-src').change(translate);
 	$('#jap-src').keyup(translate);
-	$('#source-map').change(function() {
-		converterMap = eval($('#source-map').val());
-		translate();
-	});
+	$('#jp2ua-variants').change(changeDictionary);
+	$('#source-map').change(changeDictionary);
 
 	this.click(showPopup);
   };

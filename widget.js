@@ -2981,9 +2981,6 @@ var k2uav = {
 	var window_width = $(window).width();
 	var window_height = $(window).height();
 
-	$(document).ready(onResize);
-	$(window).resize(onResize);
-
 	function onResize() {
 		window_width = $(window).width();
 //		window_height = $(window).height();
@@ -3060,12 +3057,7 @@ var k2uav = {
 		translate();
 	}
 
-  $.fn.jp2ua = function(options) {
-	var settings = $.extend( {
-		'window-holder': '#jp2ua-placeholder',
-	}, options);
-
-	$(settings['window-holder']).html(' \
+	var htmlForm = ' \
 		<div class="jp2ua overlay"></div> \
 		<div class="jp2ua window"> \
 			<h3>Японсько-українська транслітерація</h3> \
@@ -3087,18 +3079,32 @@ var k2uav = {
 			</table> \
 			<div style="text-align: right;">від проекту <a href="http://uanime.org.ua/article/jap-ukr_translit.html">uanime</a></div> \
 		</div> \
-	');
+	';
+
+  $.fn.jp2ua = function(options) {
+	var settings = $.extend({}, options);
+
+	if (settings['window-holder']) {
+		$(document).ready(onResize);
+		$(window).resize(onResize);
+
+		$(settings['window-holder']).html(htmlForm);
+		$('.jp2ua.overlay').click(hidePopup);
+		this.click(showPopup);
+	}
+	else {
+	        this.html(htmlForm);
+		$('.jp2ua.window').show();
+		$('.jp2ua.window').css("position", "relative");
+	}
 
 	if (!variantsVisibilityMap['r2ua'])
 		$('#jp2ua-variants-label').hide();
 
-	$('.jp2ua.overlay').click(hidePopup);
 	$('#jap-src').change(translate);
 	$('#jap-src').keyup(translate);
 	$('#jp2ua-variants').change(changeDictionary);
 	$('#source-map').change(changeDictionary);
-
-	this.click(showPopup);
   };
 
 })( jQuery );

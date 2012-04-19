@@ -3011,9 +3011,9 @@ var k2uav = {
 
 	function changeDictionary() {
 		if (variantsVisibilityMap[$('#source-map').val()])
-			$('#jp2ua-variants').removeAttr("disabled");
+			$('#jp2ua-variants-label').show();
 		else {
-			$('#jp2ua-variants').attr("disabled", true);
+			$('#jp2ua-variants-label').hide();
 			$('#jp2ua-variants').removeAttr('checked');
 		}
 		converterMap = eval($('#source-map').val() + ($('#jp2ua-variants').attr('checked') ? "v" : ""));
@@ -3037,7 +3037,7 @@ var k2uav = {
 						<option value="h2ua">Хірагана</options> \
 						<option value="k2ua">Катакана</options> \
 					</select> \
-					<input type="checkbox" id="jp2ua-variants" name="variants" value="v" ' + (variantsVisibilityMap["r2ua"] ? "" : "disabled") + '><small>Варіанти</small></input></td> \
+					<label for="jp2ua-variants" id="jp2ua-variants-label"><input type="checkbox" id="jp2ua-variants" name="variants" value="v" />Варіанти</label></td> \
 					<td>&rarr; Українська</td> \
 				</tr> \
 				<tr> \
@@ -3045,9 +3045,12 @@ var k2uav = {
 					<td><input type="text" id="jap-dst" style="width: 100%;"/></td> \
 				</tr> \
 			</table> \
-			<div style="text-align: right;">by <a href="http://uanime.org.ua/">uanime</a> project</div> \
+			<div style="text-align: right;">від проекту <a href="http://uanime.org.ua/article/jap-ukr_translit.html">uanime</a></div> \
 		</div> \
 	');
+
+	if (!variantsVisibilityMap['r2ua'])
+		$('#jp2ua-variants-label').hide();
 
 	$('.jp2ua.overlay').click(hidePopup);
 	$('#jap-src').change(translate);

@@ -3074,7 +3074,7 @@ var k2uav = {
 				<tr> \
 					<td><select style="width: 50%;" id="source-map"> \
 						<option value="r2ua">Ромаджі</options> \
-						<option value="h2ua">Хірагана</options> \
+						<option value="h2ua">Хіраґана</options> \
 						<option value="k2ua">Катакана</options> \
 					</select> \
 					<label for="jp2ua-variants" id="jp2ua-variants-label"><input type="checkbox" id="jp2ua-variants" name="variants" value="v" />Варіанти</label></td> \
